@@ -1,7 +1,7 @@
 <template>
   <h1>Welcome My First App Vuejs</h1>
   <p>Welcome...</p>
-  <div v-if="showModal">
+  <teleport to='#modals' v-if="showModal">
     <Modal theme='' @close='toggleModal'>
       <template v-slot:links>
         <a href="#">Sign up</a>
@@ -10,8 +10,18 @@
       <h1>The Modal Header</h1>
       <p>Modal view in vuejs crash course in ninja</p>
     </Modal>
-  </div>
+  </teleport>
+
+  <teleport to='#modals' v-if="showModalTwo">
+    <Modal theme='' @close='toggleModalTwo'>
+      <template v-slot:links>
+      </template>
+      <h1>The Modal Header</h1>
+      <p>Modal view in vuejs crash course in ninja</p>
+    </Modal>
+  </teleport>
   <button @click="toggleModal">Show Modal</button>
+  <button @click="toggleModalTwo">Open Modal</button>
 </template>
 
 <script>
@@ -25,12 +35,16 @@ export default {
       title: 'My First Vue App :)',
       header: 'The Modal Header',
       text: 'Modal view in vuejs crash course in ninja',
-      showModal: false
+      showModal: false,
+      showModalTwo: false
     }
   },
   methods: {
     toggleModal () {
       this.showModal = !this.showModal
+    },
+    toggleModalTwo () {
+      this.showModalTwo = !this.showModalTwo
     }
   }
 }
